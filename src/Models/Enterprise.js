@@ -1,14 +1,14 @@
-module.exports = (sequelize, type) => {
+module.exports = (sequelize, DataTypes) => {
   return sequelize.define('Enterprise', {
     id: {
-      type: type.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    name: type.STRING,
-    address: type.STRING,
-    city: type.STRING,
-    phone: type.INTEGER,
-    email: type.STRING,
+    name: DataTypes.STRING,
+    address: DataTypes.STRING,
+    city: DataTypes.STRING,
+    phone: DataTypes.INTEGER,
+    email: DataTypes.STRING,
   });
 };

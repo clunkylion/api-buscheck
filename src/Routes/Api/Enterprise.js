@@ -1,9 +1,7 @@
 const router = require('express').Router();
-
 //get Model
 const { Enterprise } = require('../../Lib/Mysql');
 //enterprises Routes
-
 //all enterprises
 router.get('/', async (req, res) => {
   const enterprises = await Enterprise.findAll();
@@ -18,8 +16,20 @@ router.get('/:enterpriseId', async (req, res) => {
 });
 //create
 router.post('/', async (req, res) => {
-  const enterprise = await Enterprise.create(req.body);
-  res.json(enterprise);
+  try {
+    console.log(req.body);
+    const enterprise = await Enterprise.create({
+      name: req.body.name,
+      address: req.body.address,
+      city: req.body.city,
+      phone: req.body.phone,
+      email: req.body.email,
+    });
+    res.status(200).json({ enterprise });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error });
+  }
 });
 
 //update
