@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const apiEnterpriseRouter = require('./Api/Enterprise');
+const apiEnterpriseRouter = require('./../Enterprise');
 
 router.use('/enterprises', apiEnterpriseRouter);
 
