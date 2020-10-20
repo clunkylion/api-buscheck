@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize');
 const { config } = require('../Config/index');
-//import models
-const EnterpriseModel = require('../Models/Enterprise');
 
 const connection = new Sequelize(
   config.db_name,
@@ -14,13 +12,10 @@ const connection = new Sequelize(
   }
 );
 
-//sync Models
-const Enterprise = EnterpriseModel(connection, Sequelize);
 
 //run
 connection.sync({ force: false }).then(() => {
   console.log('Synchronized Tables');
 });
-module.exports = {
-  Enterprise,
-};
+
+module.exports = connection;
