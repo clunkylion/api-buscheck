@@ -1,11 +1,11 @@
-const Enterprise = require('./Enterprise.model');
+const City = require('./City.model');
 
 const controller = {};
 
 controller.getAll = async (req, res) => {
   try {
-    const enterprises = await Enterprise.findAll();
-    res.status(200).json({ enterprises });
+    const cities = await City.findAll();
+    res.status(200).json({ cities });
   } catch (err) {
     res.status(500);
   }
@@ -13,11 +13,11 @@ controller.getAll = async (req, res) => {
 
 controller.getById = async (req, res) => {
   try {
-    const enterprise = await Enterprise.findOne({
-      where: { id: req.params.enterpriseId },
+    const city = await City.findOne({
+      where: { id: req.params.cityId },
     });
-    console.log(enterprise);
-    res.status(200).json({ enterprise });
+    console.log(city);
+    res.status(200).json({ city });
   } catch (err) {
     res.status(500);
   }
@@ -26,8 +26,8 @@ controller.getById = async (req, res) => {
 controller.create = async (req, res) => {
   try {
     const body = req.body;
-    const enterprise = await Enterprise.create(body);
-    res.status(201).json({ enterprise });
+    const city = await City.create(body);
+    res.status(201).json({ city });
   } catch (err) {
     console.log(err);
     res.status(500).json({ err });
@@ -36,11 +36,11 @@ controller.create = async (req, res) => {
 
 controller.update = async (req, res) => {
   try {
-    await Enterprise.update(req.body, {
-      where: { id: req.params.enterpriseId },
+    await City.update(req.body, {
+      where: { id: req.params.cityId },
     });
     res.status(200).json({
-      success: 'Enterprise Updated',
+      success: 'City Updated',
     });
   } catch (err) {
     res.status(500);
@@ -49,11 +49,11 @@ controller.update = async (req, res) => {
 
 controller.delete = async (req, res) => {
   try {
-    await Enterprise.destroy({
-      where: { id: req.params.enterpriseId },
+    await City.destroy({
+      where: { id: req.params.cityId },
     });
     res.status(204).json({
-      success: 'Enterprise Deleted',
+      success: 'City Deleted',
     });
   } catch (err) {
     res.status(500);
