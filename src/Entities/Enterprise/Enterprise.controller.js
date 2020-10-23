@@ -16,7 +16,6 @@ controller.getById = async (req, res) => {
     const enterprise = await Enterprise.findOne({
       where: { id: req.params.enterpriseId },
     });
-    console.log(enterprise);
     res.status(200).json({ enterprise });
   } catch (err) {
     res.status(500);
