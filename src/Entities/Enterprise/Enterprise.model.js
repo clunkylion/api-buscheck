@@ -1,5 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
-const connection = require('./../Lib/Mysql');
+const connection = require('../../Lib/Mysql');
 
 class Enterprise extends Model {};
 
