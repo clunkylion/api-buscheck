@@ -28,4 +28,5 @@ People.init(
   }
 );
 People.hasOne(User);
+
 module.exports = People;
