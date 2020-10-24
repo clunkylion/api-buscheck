@@ -1,24 +1,20 @@
 const { DataTypes, Model } = require('sequelize');
 const connection = require('../../Lib/Mysql');
-const User = require('../Role/Role.model');
-class Role extends Model {}
 
-Role.init(
+class Driver extends Model {}
+
+Driver.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    type: DataTypes.STRING,
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
+    status: DataTypes.STRING,
   },
   {
     sequelize: connection,
-    modelName: 'Role',
+    modelName: 'Driver',
   }
 );
-module.exports = Role;
+module.exports = Driver;

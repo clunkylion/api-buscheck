@@ -1,6 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
 const connection = require('../../Lib/Mysql');
-const People = require('../People/People.model');
 
 class User extends Model {}
 
@@ -21,5 +20,4 @@ User.init(
     modelName: 'User',
   }
 );
-//User.belongsTo(People);
 module.exports = User;
