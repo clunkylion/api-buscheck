@@ -7,6 +7,7 @@ app.use(express.json());
 
 //runDatabase
 require('./Lib/Mysql');
+require('./EntityRelations');
 
 //rutas
 app.use('/api', apiRouter);
