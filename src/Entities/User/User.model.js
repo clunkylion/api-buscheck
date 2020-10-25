@@ -10,7 +10,13 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    user_name: DataTypes.STRING,
+    user_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: {
+        msg: 'Username already in use',
+      },
+    },
     password: DataTypes.STRING,
     last_session: DataTypes.STRING,
     status: DataTypes.STRING,

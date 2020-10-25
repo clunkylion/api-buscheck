@@ -13,12 +13,21 @@ People.init(
     rut: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: {
+        args: true,
+        msg: 'rut already in use',
+      },
     },
     name: DataTypes.STRING,
     last_name: DataTypes.STRING,
     phone: DataTypes.INTEGER,
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: {
+        msg: 'Email already in use',
+      },
+    },
     sex: DataTypes.STRING,
     birth_date: DataTypes.STRING,
   },

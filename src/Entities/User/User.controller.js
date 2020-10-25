@@ -1,4 +1,6 @@
+const People = require('../People/People.model');
 const User = require('./User.model');
+const bcrypt = require('bcrypt');
 const controller = {};
 
 controller.getAll = async (req, res) => {
@@ -24,10 +26,29 @@ controller.getById = async (req, res) => {
 controller.create = async (req, res) => {
   try {
     const body = req.body;
-    const user = await User.create(body);
-    res.status(201).json({ user });
+    const passwordHashed = await bcrypt.hash(body.password, 10);
+
+    const people = await People.create({
+      rut: body.rut,
+      name: body.name,
+      last_name: body.last_name,
+      phone: body.phone,
+      email: body.email,
+      sex: body.sex,
+      birth_date: body.birth_date,
+    });
+    const user = await User.create({
+      user_name: body.user_name,
+      password: passwordHashed,
+      status: body.status,
+      PersonId: people.id,
+    });
+    res.status(201).json({
+      message: 'User Created',
+      data: [people, user],
+    });
   } catch (err) {
-    console.error(err);
+    console.error();
     res.status(500);
   }
 };
