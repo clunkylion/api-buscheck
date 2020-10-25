@@ -27,7 +27,6 @@ controller.create = async (req, res) => {
   try {
     const body = req.body;
     const passwordHashed = await bcrypt.hash(body.password, 10);
-
     const people = await People.create({
       rut: body.rut,
       name: body.name,
@@ -42,6 +41,8 @@ controller.create = async (req, res) => {
       password: passwordHashed,
       status: body.status,
       PersonId: people.id,
+      RoleId: body.roleId,
+      EnterpriseId: body.enterpriseId,
     });
     res.status(201).json({
       message: 'User Created',
@@ -54,9 +55,17 @@ controller.create = async (req, res) => {
 };
 controller.update = async (req, res) => {
   try {
-    await User.update(req.body, {
-      where: { id: req.params.userId },
-    });
+    const passwordHashed = await bcrypt.hash(req.body.password, 10);
+    await User.update(
+      {
+        user_name: req.body.user_name,
+        status: req.body.status,
+        password: passwordHashed,
+      },
+      {
+        where: { id: req.params.userId },
+      }
+    );
     res.status(200).json({
       success: 'User Updated',
     });
