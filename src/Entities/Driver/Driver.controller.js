@@ -1,3 +1,4 @@
+const People = require('../People/People.model');
 const Driver = require('./Driver.model');
 
 const controller = {};
@@ -25,8 +26,24 @@ controller.getById = async (req, res) => {
 controller.create = async (req, res) => {
   try {
     const body = req.body;
-    const driver = await Driver.create(body);
-    res.status(201).json({ driver });
+    const people = await People.create({
+      rut: body.rut,
+      name: body.name,
+      last_name: body.last_name,
+      phone: body.phone,
+      email: body.email,
+      sex: body.sex,
+      birth_date: body.birth_date,
+    });
+    const driver = await Driver.create({
+      status: body.status,
+      PersonId: people.id,
+      EnterpriseId: body.enterpriseId,
+    });
+    res.status(201).json({
+      message: 'Driver created',
+      data: [people, driver],
+    });
   } catch (err) {
     console.error(err);
     res.status(500);
