@@ -10,6 +10,7 @@ Route.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    hour: DataTypes.STRING,
   },
   {
     sequelize: connection,
