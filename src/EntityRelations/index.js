@@ -9,7 +9,7 @@ const City = require('../Entities/City/City.model');
 const Origin = require('../Entities/Origin/Origin.model');
 const Destination = require('../Entities/Destination/Destination.model');
 const Route = require('../Entities/Route/Route.model');
-const Hour = require('../Entities/Hour/Hour.model');
+const Bus = require('../Entities/Bus/Bus.model');
 
 //User BelongTo People || People HasOne User
 People.hasOne(User);
@@ -41,6 +41,6 @@ Destination.hasMany(Route);
 //Route belongsTo Origin || Origin HasMany Route
 Route.belongsTo(Origin);
 Origin.hasMany(Route);
-//Route belongsToMany Hours || Hours BelongsToMany Routes
-Route.belongsToMany(Hour, { through: 'HourRoute' });
-Hour.belongsToMany(Route, { through: 'HourRoute' });
+//Route belongsToMany Bus || Bus BelongsToMany Routes
+Route.belongsToMany(Bus, { through: 'BusRoute' });
+Bus.belongsToMany(Route, { through: 'BusRoute' });
