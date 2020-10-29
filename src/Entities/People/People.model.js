@@ -1,7 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
 const connection = require('../../Lib/Mysql');
-const { max } = require('../User/User.model');
-//const User = require('../User/User.model');
 class People extends Model {}
 
 People.init(

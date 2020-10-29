@@ -14,7 +14,7 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: {
-        msg: 'Username already in use',
+        msg: 'El nombre de usuario ya está registrado',
       },
     },
     password: DataTypes.STRING,
