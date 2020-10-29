@@ -49,8 +49,14 @@ controller.create = async (req, res) => {
       data: [people, user],
     });
   } catch (err) {
-    console.error();
-    res.status(500);
+    let errorMessage = {
+      message: 'Ops ha ocurrido un error...',
+    };
+    if (err.errors && err.errors.length > 0) {
+      errorMessage.message = err.errors[0].message;
+    }
+    console.error(err);
+    res.status(500).json(errorMessage);
   }
 };
 controller.update = async (req, res) => {
