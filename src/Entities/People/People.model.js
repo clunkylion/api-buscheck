@@ -1,5 +1,6 @@
 const { DataTypes, Model } = require('sequelize');
 const connection = require('../../Lib/Mysql');
+const { max } = require('../User/User.model');
 //const User = require('../User/User.model');
 class People extends Model {}
 
@@ -14,8 +15,17 @@ People.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: {
-        args: true,
-        msg: 'rut already in use',
+        msg: 'El rut ya está registrado',
+      },
+      validate: {
+        min: {
+          args: 10,
+          msg: 'Minimo 10 caracteres en el rut',
+        },
+        is: {
+          args: /^\d{1,2}\.\d{3}\.\d{3}[-][0-9kK]{1}$/i,
+          msg: 'El rut no es valido',
+        },
       },
     },
     name: DataTypes.STRING,
@@ -25,7 +35,14 @@ People.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: {
-        msg: 'Email already in use',
+        msg: 'El email ya está registrado',
+      },
+      validate: {
+        isEmail: {
+          msg: 'El email debe ser valido',
+        },
+        min: 5,
+        max: 130,
       },
     },
     sex: DataTypes.STRING,
