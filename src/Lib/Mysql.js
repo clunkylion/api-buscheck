@@ -13,7 +13,7 @@ const connection = new Sequelize(
 );
 
 //run
-connection.sync({ force: false }).then(() => {
+connection.sync({ force: true }).then(() => {
   console.log('Synchronized Tables');
 });
 
