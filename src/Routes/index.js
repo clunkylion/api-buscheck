@@ -14,6 +14,7 @@ const apiSeatRouter = require('../Entities/Seat');
 const apiTicketRouter = require('../Entities/Ticket');
 const apiTotalSaleRouter = require('../Entities/TotalSale');
 const apiFormRouter = require('../Entities/Form');
+const apiPhotoBusRouter = require('../Entities/PhotoBus');
 
 router.use('/enterprises', apiEnterpriseRouter);
 router.use('/cities', apiCityRouter);
@@ -29,4 +30,5 @@ router.use('/seats', apiSeatRouter);
 router.use('/tickets', apiTicketRouter);
 router.use('/totalSales', apiTotalSaleRouter);
 router.use('/forms', apiFormRouter);
+router.use('photoBuses', apiPhotoBusRouter);
 module.exports = router;
