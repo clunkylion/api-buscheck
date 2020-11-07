@@ -1,5 +1,6 @@
 const PhotoBus = require('./PhotoBus.model');
-
+const multer = require('multer');
+const upload = multer({ dest: '../../Public/img/BusPhotos' });
 const controller = {};
 
 controller.getAll = async (req, res) => {
