@@ -47,3 +47,30 @@ Driver.hasMany(Bus);
 //Seat BelongsTo Bus || Bus HasMany Seat
 Seat.belongsTo(Bus);
 Bus.hasMany(Seat);
+//Form Belongs To Bus || Bus hasMany Form
+Form.belongsTo(Bus);
+Bus.hasMany(Form);
+//Form Belongs To Route || Route hasMany Form
+Form.belongsTo(Route);
+Route.hasMany(Form);
+//Form Belongs To User || User hasMany Form
+Form.belongsTo(User);
+User.hasMany(Form);
+//Ticket Belongs To Route || Route hasMany Tickets
+Ticket.belongsTo(Route);
+Route.hasMany(Ticket);
+//Ticket Belongs To Bus || Bus hasMany Tickets
+Ticket.belongsTo(Bus);
+Bus.hasMany(Ticket);
+//Ticket Belongs To User || User hasMany Tickets
+Ticket.belongsTo(User);
+User.hasMany(Ticket);
+//TotalSale Belongs To Route || Route hasMany TotalSale
+TotalSale.belongsTo(Route);
+Route.hasMany(TotalSale);
+//TotalSale Belongs To Bus || Bus hasMany TotalSale
+TotalSale.belongsTo(Bus);
+Bus.hasMany(TotalSale);
+//TotalSale Belongs To User || User hasMany TotalSale
+TotalSale.belongsTo(User);
+User.hasMany(TotalSale);
