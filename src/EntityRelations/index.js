@@ -13,6 +13,7 @@ const Seat = require('../Entities/Seat/Seat.model');
 const Form = require('../Entities/Form/Form.model');
 const Ticket = require('../Entities/Ticket/Ticket.model');
 const TotalSale = require('../Entities/TotalSale/TotalSale.model');
+const PhotoBus = require('../Entities/PhotoBus/PhotoBus.model');
 
 //Role BelongsTo User || User HasMany Role
 User.belongsTo(Role);
@@ -74,3 +75,6 @@ Bus.hasMany(TotalSale);
 //TotalSale Belongs To User || User hasMany TotalSale
 TotalSale.belongsTo(User);
 User.hasMany(TotalSale);
+//PhotoBus Belongs To Bus || Bus hasMany PhotoBus
+PhotoBus.belongsTo(Bus);
+Bus.hasMany(PhotoBus);
