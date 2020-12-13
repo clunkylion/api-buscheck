@@ -14,14 +14,14 @@ Bus.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: {
-        args: true,
         msg: 'Patent already in use',
       },
     },
     status: DataTypes.STRING,
     brand: DataTypes.STRING,
-    model: DataTypes.INTEGER,
+    model: DataTypes.STRING,
     technical_review: DataTypes.STRING,
+    seats: DataTypes.INTEGER,
   },
   {
     sequelize: connection,
