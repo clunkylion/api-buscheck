@@ -1,10 +1,10 @@
 const Destination = require('./Destination.model');
-
+const Station = require('../Station/Station.model');
 const controller = {};
 
 controller.getAll = async (req, res) => {
   try {
-    const destinations = await Destination.findAll();
+    const destinations = await Destination.findAll({ include: Station });
     res.status(200).json({ destinations });
   } catch (err) {
     res.status(500);
@@ -15,6 +15,7 @@ controller.getById = async (req, res) => {
   try {
     const destination = await Destination.findOne({
       where: { id: req.params.destinationId },
+      include: { model: Station },
     });
     console.log(destination);
     res.status(200).json({ destination });
@@ -27,7 +28,7 @@ controller.create = async (req, res) => {
   try {
     const body = req.body;
     const destination = await Destination.create({
-      StationId: body.stationId,
+      StationId: body.StationId,
     });
     res.status(201).json({ destination });
   } catch (err) {
