@@ -1,11 +1,11 @@
+const City = require('../City/City.model');
 const Station = require('./Station.model');
-
 const controller = {};
 
 controller.getAll = async (req, res) => {
   try {
-    const stations = await Station.findAll();
-    res.status(200).json({ stations });
+    const stations = await Station.findAll({ include: City });
+    res.status(200).json({ data: { stations } });
   } catch (err) {
     res.status(500);
   }
@@ -15,8 +15,8 @@ controller.getById = async (req, res) => {
   try {
     const station = await Station.findOne({
       where: { id: req.params.stationId },
+      include: { model: City },
     });
-    console.log(station);
     res.status(200).json({ station });
   } catch (err) {
     res.status(500);
@@ -28,7 +28,7 @@ controller.create = async (req, res) => {
     const body = req.body;
     const station = await Station.create({
       name: body.name,
-      city_id: body.city_id,
+      CityId: body.city_id,
     });
     res.status(201).json({ station });
   } catch (err) {
@@ -39,9 +39,16 @@ controller.create = async (req, res) => {
 
 controller.update = async (req, res) => {
   try {
-    await Station.update(req.body, {
-      where: { id: req.params.stationId },
-    });
+    const body = req.body;
+    await Station.update(
+      {
+        name: body.name,
+        CityId: body.city_id,
+      },
+      {
+        where: { id: req.params.stationId },
+      }
+    );
     res.status(200).json({
       success: 'Bus Station Updated',
     });
