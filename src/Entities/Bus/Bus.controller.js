@@ -1,5 +1,6 @@
 const Bus = require('./Bus.model');
 const Seat = require('../Seat/Seat.model');
+const Route = require('../Route/Route.model');
 const controller = {};
 
 controller.getAll = async (req, res) => {
@@ -15,12 +16,17 @@ controller.getById = async (req, res) => {
   try {
     const bus = await Bus.findOne({
       where: { id: req.params.busId },
-    });
-    const busSeats = await Seat.findAll({
-      where: { busId: req.params.busId },
+      include: [
+        {
+          model: Seat,
+        },
+        {
+          model: Route,
+        },
+      ],
     });
     res.status(200).json({
-      data: { bus, seats: busSeats },
+      data: { bus },
     });
   } catch (err) {
     console.error(err);
