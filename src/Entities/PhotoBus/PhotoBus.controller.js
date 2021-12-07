@@ -1,8 +1,26 @@
 const PhotoBus = require('./PhotoBus.model');
 const multer = require('multer');
-const upload = multer({ dest: '../../Public/img/BusPhotos' });
 const controller = {};
-
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, '../../Public/img/BusPhotos');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimeType === 'image/jpg' ||
+    file.mimeType === 'image/jpeg' ||
+    file.mimeType === 'image/png'
+  ) {
+    cb(null, true);
+  } else {
+    cb(new Error('La imagen debe ser jpg, jpeg o png'), false);
+  }
+};
+const upload = multer({ storage: storage, fileFilter: fileFilter });
 controller.getAll = async (req, res) => {
   try {
     const photos = await PhotoBus.findAll();
@@ -29,6 +47,7 @@ controller.create = async (req, res) => {
     const body = req.body;
     const photoBus = await PhotoBus.create({
       BusId: body.BusId,
+      photoUrl: storage.data.photoURL
     });
     res.status(201).json({ photoBus });
   } catch (err) {

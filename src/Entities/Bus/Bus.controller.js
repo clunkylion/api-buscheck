@@ -1,6 +1,7 @@
 const Bus = require('./Bus.model');
 const Seat = require('../Seat/Seat.model');
 const Route = require('../Route/Route.model');
+
 const controller = {};
 
 controller.getAll = async (req, res) => {
